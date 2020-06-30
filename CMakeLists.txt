@@ -61,6 +61,11 @@ target_link_libraries(diligent-engine-vulkan
     diligent-engine
 )
 
+install(TARGETS	diligent-engine diligent-engine-opengl diligent-engine-vulkan 
+        ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+        RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+)
 
 set(CPACK_GENERATOR "DEB")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "epicodic@web.de")
@@ -71,7 +76,7 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "diligent-engine")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "diligent-engine")
 set(CPACK_PACKAGE_NAME "diligent-engine")
 set(CPACK_PACKAGE_VENDOR "diligent-engine")
-set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+#set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 set(CPACK_PACKAGE_CONTACT "Diligent Graphics <info@diligent-engineics.com>")
 
 include(CPack)
