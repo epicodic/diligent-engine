@@ -69,8 +69,9 @@ install(TARGETS	diligent-engine diligent-engine-opengl diligent-engine-vulkan
 
 set(CPACK_GENERATOR "DEB")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "epicodic@web.de")
-set(CPACK_PACKAGING_INSTALL_PREFIX=/opt/diligent-engine)
-set(CPACK_DEBIAN_PACKAGE_NAME=diligent-engine)
+set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/diligent-engine")
+set(CPACK_INSTALL_PREFIX "/opt/diligent-engine")
+set(CPACK_DEBIAN_PACKAGE_NAME "diligent-engine")
 set(CPACK_PACKAGE_VERSION "1.0")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "diligent-engine")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "diligent-engine")
