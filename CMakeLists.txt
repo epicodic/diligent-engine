@@ -68,15 +68,6 @@ install(TARGETS	diligent-engine diligent-engine-opengl diligent-engine-vulkan
 )
 
 
-
-add_custom_command(
-    TARGET diligent-engine
-    PRE_BUILD
-    COMMAND ${CMAKE_COMMAND}
-        -P "${CMAKE_CURRENT_LIST_DIR}/update_build_number.cmake"
-)
-
-
 set(CPACK_GENERATOR "DEB")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "epicodic@web.de")
 set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/diligent-engine")
@@ -85,7 +76,14 @@ set(CPACK_DEBIAN_PACKAGE_NAME "diligent-engine")
 set(CPACK_PACKAGE_VERSION_MAJOR 1)
 set(CPACK_PACKAGE_VERSION_MINOR 0)
 
-file(READ "build_number.txt" BUILD_NUMBER)
+set(BUILD_NUMBER_FILE "${CMAKE_CURRENT_BINARY_DIR}/build_number.txt")
+set(BUILD_NUMBER "1")
+IF(EXISTS ${BUILD_NUMBER_FILE})
+    file(READ ${BUILD_NUMBER_FILE} BUILD_NUMBER)
+    math(EXPR BUILD_NUMBER "${BUILD_NUMBER}+1")
+ENDIF()
+file(WRITE ${BUILD_NUMBER_FILE} "${BUILD_NUMBER}")
+
 set(CPACK_PACKAGE_VERSION_PATCH ${BUILD_NUMBER})
 
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "diligent-engine")
@@ -96,3 +94,4 @@ set(CPACK_PACKAGE_VENDOR "diligent-engine")
 set(CPACK_PACKAGE_CONTACT "Diligent Graphics <info@diligent-engineics.com>")
 
 include(CPack)
+
