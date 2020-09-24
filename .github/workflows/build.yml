@@ -1,0 +1,82 @@
+name: diligent-engine
+
+on: [push]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build-bionic:
+    runs-on: ubuntu-18.04
+    env: 
+      DISTRO_CODENAME: bionic
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Install dependencies
+      run: sudo apt install mesa-common-dev libgl1-mesa-dev
+      
+    - name: Checkout submodules
+      run: git submodule update --init --recursive
+
+    - name: Create Build Environment
+      run: cmake -E make_directory ${{runner.workspace}}/build
+
+    - name: Configure CMake
+      shell: bash
+      working-directory: ${{runner.workspace}}/build
+      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+
+    - name: Build
+      working-directory: ${{runner.workspace}}/build
+      shell: bash
+      run: cmake --build . --config $BUILD_TYPE
+
+    - name: Packaging
+      working-directory: ${{runner.workspace}}/build
+      shell: bash
+      run: cpack
+      
+    - uses: actions/upload-artifact@v2
+      with:
+        name: package
+        path: ${{runner.workspace}}/build/*.deb    
+
+  # THIS IS A COPY OF THE ABOVE AS ANCHORS ARE NOT YET SUPPORTED BY GITHUB
+  build-bionic:
+    runs-on: ubuntu-16.04
+    env: 
+      DISTRO_CODENAME: xenial
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Install dependencies
+      run: sudo apt install mesa-common-dev libgl1-mesa-dev
+      
+    - name: Checkout submodules
+      run: git submodule update --init --recursive
+
+    - name: Create Build Environment
+      run: cmake -E make_directory ${{runner.workspace}}/build
+
+    - name: Configure CMake
+      shell: bash
+      working-directory: ${{runner.workspace}}/build
+      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+
+    - name: Build
+      working-directory: ${{runner.workspace}}/build
+      shell: bash
+      run: cmake --build . --config $BUILD_TYPE
+
+    - name: Packaging
+      working-directory: ${{runner.workspace}}/build
+      shell: bash
+      run: cpack
+      
+    - uses: actions/upload-artifact@v2
+      with:
+        name: package
+        path: ${{runner.workspace}}/build/*.deb    
