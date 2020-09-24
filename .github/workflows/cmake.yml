@@ -17,6 +17,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       
+    - name: Install dependencies
+      run: sudo apt install mesa-common-dev   
+      
     - name: Checkout submodules
       run: git submodule update --init --recursive
 
