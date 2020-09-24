@@ -75,7 +75,7 @@ set(CPACK_PACKAGE_NAME "diligent-engine")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "diligent-engine")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "diligent-engine")
 set(CPACK_PACKAGE_VENDOR "diligent-engine")
-set(CPACK_PACKAGE_CONTACT "epicodic@web.de"")
+set(CPACK_PACKAGE_CONTACT "epicodic@web.de")
 
 set(CPACK_PACKAGE_VERSION_MAJOR 1)
 set(CPACK_PACKAGE_VERSION_MINOR 0)
